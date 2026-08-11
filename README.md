@@ -1,672 +1,460 @@
-# Port AI Suite
+# 🚢 SmartPort AI
 
-You are an Elite UI/UX Designer, Senior React Engineer, Next.js Architect, Product Designer, Frontend Lead and Enterprise SaaS Developer.
+### AI-Powered Intelligent Port Management & Congestion Prevention Platform
 
-Build a COMPLETE production-grade frontend for an enterprise platform called
+SmartPort AI is an integrated **AI-powered port management platform** designed to predict, prevent, and reduce port congestion by connecting major port operations through a unified digital system.
 
-SMARTPORT AI
+The platform brings together **shipping companies, port authorities, terminal operations, truck management, yard management, cargo operations, berth management, and document verification** into a coordinated workflow.
 
-Tagline:
+Instead of reacting to congestion after delays and queues occur, SmartPort AI uses operational data and AI-driven analysis to **identify potential bottlenecks early and support preventive decision-making**.
 
-AI Powered Port Congestion Prediction & Logistics Intelligence Platform
+---
 
-========================================================
+## 🎯 Problem Statement
 
-IMPORTANT
+Ports handle large volumes of vessels, containers, trucks, cargo, and documentation every day. However, operational activities can become fragmented across different stakeholders and systems.
 
-========================================================
+This can lead to:
 
-This is NOT a demo.
+* Vessel waiting and berth conflicts
+* Truck queues and gate congestion
+* Yard overcrowding
+* Cargo movement delays
+* Documentation and approval delays
+* Poor coordination between stakeholders
+* Limited real-time visibility
+* Reactive congestion management
 
-This is NOT a student dashboard.
+SmartPort AI addresses these challenges by creating a **unified operational platform with predictive intelligence and decision support**.
 
-This is NOT an admin template.
+---
 
-Build it exactly like software used by
+## 💡 Proposed Solution
 
-• Port Authorities
+SmartPort AI connects the complete port operational workflow:
 
-• Shipping Companies
+**Shipping Company → Document Submission → Verification & Approval → Vessel Arrival → Berth Management → Cargo/Container Operations → Yard Management → Truck & Gate Management → AI Monitoring → Congestion Prediction → Intelligent Recommendation → Operational Action**
 
-• Terminal Operators
+The system continuously monitors operational conditions and identifies potential congestion risks before they become critical.
 
-• Customs Departments
+---
 
-• Logistics Companies
+## 🚀 Key Features
 
-• Truck Operators
+### 🚢 Vessel Management
 
-• Government Agencies
+* Vessel registration and tracking
+* IMO and voyage information
+* ETA / ETD monitoring
+* Vessel operational status
+* Arrival and departure tracking
 
-Everything must look production ready.
+### ⚓ Berth Management
 
-No Bootstrap.
+* Berth availability monitoring
+* Vessel-to-berth coordination
+* Berth scheduling
+* Occupancy monitoring
+* Identification of potential berth conflicts
 
-No generic dashboard.
+### 📄 Document Management & Verification
 
-No lorem ipsum.
+* Digital document submission
+* Document status tracking
+* Validation and verification workflow
+* Port authority approval
+* Approval/rejection tracking
+* Document audit trail
 
-No placeholder cards.
+### 📦 Cargo & Container Management
 
-No fake statistics.
+* Cargo information management
+* Container tracking
+* Cargo movement monitoring
+* Operational status tracking
+* Coordination with vessel and yard activities
 
-If backend APIs are unavailable, display elegant loading, unavailable, or empty states rather than fabricated values.
+### 🏗️ Yard Management
 
-The UI must be fully wired for real backend integration.
-
-========================================================
-
-TECH STACK
-
-========================================================
-
-Next.js 15
-
-React
-
-TypeScript
-
-Tailwind CSS
-
-Framer Motion
-
-React Query
-
-React Hook Form
-
-Zod
-
-Axios
-
-Mapbox GL
-
-React Leaflet (fallback)
-
-Lucide Icons
-
-Recharts
-
-Three.js
-
-React Three Fiber
-
-========================================================
-
-DESIGN
-
-========================================================
-
-Premium enterprise design.
-
-Inspired by
-
-Stripe
-
-Palantir
-
-Linear
-
-Tesla Fleet
-
-MarineTraffic
-
-Google Earth
-
-Apple
-
-Vercel
-
-Windy
-
-Dark Navy theme
-
-Glassmorphism
-
-Electric Cyan
-
-Purple gradients
-
-Animated background blur
-
-Premium typography
-
-Large spacing
-
-Floating glass cards
-
-Rounded components
-
-Professional shadows
-
-Smooth transitions
-
-Micro animations
-
-Modern charts
-
-Interactive maps
-
-Beautiful empty states
-
-Elegant loading skeletons
-
-Responsive
-
-========================================================
-
-LANDING PAGE
-
-========================================================
-
-Create one of the most beautiful landing pages ever made.
-
-Animated smart port.
-
-Include
-
-moving cargo ships
-
-animated sea
-
-moving cranes
-
-moving trucks
-
-container stacks
-
-fog
-
-waves
-
-birds
-
-lights
-
-clouds
-
-particle effects
-
-smooth parallax
-
-Framer Motion animations
-
-Hero
-
-AI Powered Smart Port Intelligence
-
-Subtitle
-
-Predict congestion
-
-Optimize logistics
-
-Improve berth utilization
-
-Reduce waiting time
-
-Buttons
-
-Launch Platform
-
-Watch AI Workflow
-
-View Live Port
-
-Additional sections
-
-Features
-
-Architecture
-
-AI Models
-
-Technology Stack
-
-Workflow
-
-Partners
-
-Pricing
-
-FAQ
-
-Contact
-
-Professional footer
-
-========================================================
-
-AUTHENTICATION
-
-========================================================
-
-Create pages
-
-Login
-
-Register
-
-Forgot Password
-
-Reset Password
-
-Verify Email
-
-Google Login
-
-JWT ready
-
-Role based login
-
-========================================================
-
-ROLES
-
-========================================================
-
-Admin
-
-Port Authority
-
-Shipping Company
-
-Terminal Operator
-
-Truck Operator
-
-Customs Officer
-
-Each role must have its own dashboard and navigation.
-
-========================================================
-
-COMMON COMPONENTS
-
-========================================================
-
-Sidebar
-
-Top Navigation
-
-Notification Center
-
-Global Search
-
-Profile Menu
-
-Breadcrumb
-
-Theme Switch
-
-Command Palette
-
-Activity Feed
-
-Real-time Alerts
-
-Settings
-
-========================================================
-
-ADMIN PORTAL
-
-========================================================
-
-User Management
-
-Role Management
-
-Permission Management
-
-System Health
-
-AI Model Management
-
-Audit Logs
-
-Reports
-
-API Keys
-
-System Monitoring
-
-========================================================
-
-PORT AUTHORITY
-
-========================================================
-
-Live Port Dashboard
-
-Congestion Score
-
-Berth Occupancy
-
-Waiting Ships
-
-Ship Queue
-
-Traffic Heatmap
-
-Weather Impact
-
-Recommendations
-
-========================================================
-
-SHIPPING COMPANY
-
-========================================================
-
-Fleet Overview
-
-Voyages
-
-ETA
-
-Delay Prediction
-
-Cargo
-
-Documents
-
-Invoices
-
-Tracking
-
-========================================================
-
-TERMINAL OPERATOR
-
-========================================================
-
-Berth Assignment
-
-Crane Status
-
-Container Yard
-
-Equipment
-
-Maintenance
-
-Yard Utilization
-
-========================================================
-
-TRUCK OPERATOR
-
-========================================================
-
-Slot Booking
-
-Gate Queue
-
-QR Entry
-
-Route Suggestion
-
-Waiting Time
-
-Trip History
-
-========================================================
-
-CUSTOMS
-
-========================================================
-
-Document Verification
-
-Risk Assessment
-
-Cargo Inspection
-
-Approvals
-
-Clearance
-
-Alerts
-
-========================================================
-
-LIVE MAP
-
-========================================================
-
-Interactive map
-
-Dark theme
-
-Ships
-
-Ports
-
-Routes
-
-Warehouses
-
-Truck Gates
-
-Clusters
-
-Animated ship icons
-
-Live movement
-
-========================================================
-
-AI MODULE
-
-========================================================
-
-Prediction Dashboard
-
-Congestion Prediction
-
-Risk Score
-
-Confidence
-
-Feature Importance
-
-SHAP Charts
-
-Model Comparison
-
-Historical Trends
-
-Recommendations
-
-========================================================
-
-ANALYTICS
-
-========================================================
-
-Charts
-
-Area
-
-Line
-
-Radar
-
-Treemap
-
-Sunburst
-
-Heatmap
-
-Gauge
-
-Network Graph
-
-Timeline
-
-========================================================
-
-REPORTS
-
-========================================================
-
-Generate Reports
-
-PDF
-
-Excel
-
-CSV
-
-History
-
-Downloads
-
-========================================================
-
-SETTINGS
-
-========================================================
-
-Profile
-
-Security
-
-Notifications
-
-Appearance
-
-Organization
-
-API Tokens
-
-========================================================
-
-UI REQUIREMENTS
-
-========================================================
-
-Everything animated.
-
-Smooth page transitions.
-
-Glass cards.
-
-Interactive hover effects.
-
-Skeleton loading.
-
-Responsive.
-
-Accessibility compliant.
-
-Professional spacing.
-
-No duplicated code.
-
-Reusable components.
-
-========================================================
-
-API INTEGRATION
-
-========================================================
-
-Do NOT hardcode business data.
-
-Every page must consume REST APIs using React Query.
-
-Create reusable API services.
-
-Create TypeScript interfaces.
-
-Use loading states.
-
-Use error states.
-
-Use empty states.
-
-Do not generate fake metrics.
-
-If an endpoint has no data, display:
-
-"Data unavailable from backend."
-
-instead of fabricated values.
-
-========================================================
-
-OUTPUT
-
-========================================================
-
-Generate the complete frontend project including
-
-App Router
-
-Layouts
-
-Components
-
-Pages
-
-Hooks
-
-Stores
-
-Services
-
-Types
-
-Utilities
-
-Theme
-
-Animations
-
-Navigation
-
-Responsive layouts
-
-Authentication flow
-
-Role-based dashboards
-
-API layer
-
-Folder structure
-
-Everything should be immediately connectable to a FastAPI backend.
-
-No placeholder implementations.
-
-No dummy UI.
-
-No fake charts.
-
-No hardcoded metrics.
-
-Produce a premium enterprise interface worthy of a national smart port platform.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://smartportai.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/8efe13aa-159f-4cf0-8f05-19f3baa91a01).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+* Yard occupancy monitoring
+* Container movement tracking
+* Yard capacity visibility
+* Identification of potential yard bottlenecks
+
+### 🚛 Truck Management
+
+* Truck registration
+* Gate and appointment management
+* Truck arrival monitoring
+* Queue monitoring
+* Coordination between truck and cargo operations
+
+### 🤖 AI Congestion Prediction
+
+The AI layer analyses operational parameters such as:
+
+* Vessel schedules
+* Berth occupancy
+* Yard utilization
+* Truck demand
+* Cargo volume
+* Historical operational data
+* Delays and operational conditions
+
+The system generates a **congestion risk assessment** and identifies potential operational bottlenecks.
+
+### 🧠 AI Decision Support
+
+When a congestion risk is detected, SmartPort AI evaluates available operational conditions and provides recommendations to support decisions involving:
+
+* Vessel scheduling
+* Berth allocation
+* Truck flow
+* Yard operations
+* Cargo movement
+* Operational prioritization
+
+### 📊 Real-Time Dashboards
+
+Role-based dashboards provide relevant operational information to different stakeholders.
+
+The system provides visibility into:
+
+**Vessels | Berths | Cargo | Containers | Yard | Trucks | Documents | Congestion Risk | AI Recommendations**
+
+### 🔐 Authentication & Role-Based Access
+
+The platform includes secure role-based access so that users can access only the operations relevant to their responsibilities.
+
+---
+
+## 🔄 End-to-End Workflow
+
+```text
+┌──────────────────────┐
+│   Shipping Company   │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Vessel & Cargo Data  │
+│     Submission       │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Document Submission  │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Document Verification│
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Port Authority       │
+│ Approval              │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Vessel Arrival & ETA │
+│      Monitoring      │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│   Berth Management   │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Cargo & Container    │
+│      Operations      │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│    Yard Management   │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Truck & Gate         │
+│     Management       │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Real-Time Operational│
+│       Monitoring     │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ AI Congestion        │
+│     Prediction       │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Risk Detection &     │
+│ Impact Analysis      │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ AI Decision &        │
+│ Recommendation       │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Operational Action   │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Continuous Monitoring│
+└──────────────────────┘
+```
+
+---
+
+## 🧠 AI Decision Flow
+
+```text
+Operational Data
+       ↓
+Data Validation
+       ↓
+Feature Extraction
+       ↓
+AI/ML Analysis
+       ↓
+Congestion Risk Score
+       ↓
+Risk Classification
+       ↓
+Identify Bottleneck
+       ↓
+Evaluate Available Resources
+       ↓
+Generate Recommendations
+       ↓
+Rank Feasible Actions
+       ↓
+Notify Stakeholders
+       ↓
+Operational Action
+```
+
+---
+
+## 🏗️ System Architecture
+
+```text
+┌─────────────────────────────────────────────┐
+│              User Interface                 │
+│       React + TypeScript Web Application    │
+└──────────────────────┬──────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────┐
+│          Authentication & RBAC               │
+└──────────────────────┬──────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────┐
+│              Backend API Layer              │
+│             Node.js / TypeScript            │
+└───────────────┬─────────────────────────────┘
+                ↓
+┌─────────────────────────────────────────────┐
+│        Operational Data & Workflows         │
+│ Vessel | Berth | Cargo | Yard | Truck      │
+│ Documents | Approvals | Notifications      │
+└───────────────┬─────────────────────────────┘
+                ↓
+┌─────────────────────────────────────────────┐
+│              PostgreSQL Database            │
+└───────────────┬─────────────────────────────┘
+                ↓
+┌─────────────────────────────────────────────┐
+│                AI / ML Layer                │
+│ Prediction | Risk Analysis | Recommendations│
+└──────────────────────┬──────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────┐
+│       Alerts & Decision Support             │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer               | Technology                    |
+| ------------------- | ----------------------------- |
+| Frontend            | React                         |
+| Language            | TypeScript                    |
+| Backend             | Node.js                       |
+| API                 | REST API                      |
+| Database            | PostgreSQL                    |
+| AI/ML               | Python / Machine Learning     |
+| Authentication      | Role-Based Access Control     |
+| Document Processing | Digital Verification Workflow |
+| Version Control     | Git / GitHub                  |
+
+---
+
+## 👥 Main Stakeholders
+
+SmartPort AI is designed to support multiple stakeholders within the port ecosystem:
+
+* **Port Authority**
+* **Shipping Companies**
+* **Terminal Operators**
+* **Cargo / Logistics Operators**
+* **Truck Operators**
+* **Yard Operations**
+* **Other Authorized Port Stakeholders**
+
+Each stakeholder receives role-specific access and operational functionality.
+
+---
+
+## 📈 Expected Impact
+
+SmartPort AI aims to help ports:
+
+* Reduce vessel waiting time
+* Reduce berth conflicts
+* Reduce truck queue formation
+* Improve yard utilization
+* Improve cargo flow
+* Reduce documentation-related delays
+* Improve stakeholder coordination
+* Detect congestion risks earlier
+* Support faster operational decisions
+* Improve overall port efficiency
+
+---
+
+## 🔁 Core Intelligence Model
+
+SmartPort AI follows a continuous operational intelligence loop:
+
+```text
+OBSERVE
+   ↓
+ANALYSE
+   ↓
+PREDICT
+   ↓
+DECIDE
+   ↓
+RECOMMEND
+   ↓
+ACT
+   ↓
+MONITOR
+   ↓
+LEARN
+   ↺
+```
+
+This transforms traditional **reactive port management** into a more **predictive and preventive operational model**.
+
+---
+
+## 🔒 Security
+
+The platform is designed with security and controlled access in mind:
+
+* Secure authentication
+* Role-based authorization
+* Protected operational data
+* Document access control
+* Input validation
+* Audit tracking
+* Controlled administrative access
+
+---
+
+## 📂 Project Structure
+
+```text
+SmartPort-AI/
+│
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── dashboards/
+│   ├── services/
+│   └── assets/
+│
+├── backend/
+│   ├── controllers/
+│   ├── routes/
+│   ├── services/
+│   ├── middleware/
+│   └── models/
+│
+├── ai/
+│   ├── models/
+│   ├── preprocessing/
+│   ├── prediction/
+│   └── recommendation/
+│
+├── database/
+│   ├── schema/
+│   └── migrations/
+│
+├── docs/
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd SmartPort-AI
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file and configure the required database, authentication, API, and application settings.
+
+```env
+DATABASE_URL=
+API_URL=
+JWT_SECRET=
+```
+
+### 4. Start the application
+
+```bash
 npm run dev
 ```
+
+---
+
+## 🧪 Development
+
+The project is developed as a modular platform where port operations can be independently managed while remaining connected through the central operational workflow.
+
+Future model improvements can be incorporated as additional historical port-operation data becomes available.
+
+---
+
+## 🎯 Project Objective
+
+The ultimate goal of SmartPort AI is to create a **unified intelligent port ecosystem** where operational data from different stakeholders can be transformed into actionable intelligence.
+
+> **From fragmented operations to connected intelligence.**
+> **From reactive congestion management to predictive prevention.**
+
+---
+
+## 🚢 SmartPort AI
+
+**Predict. Coordinate. Prevent.**
+
+An intelligent approach to building the next generation of efficient and connected ports.
