@@ -1,0 +1,10 @@
+REVOKE ALL ON FUNCTION public.has_any_role(uuid, app_role[]) FROM PUBLIC, anon;
+REVOKE ALL ON FUNCTION public.enforce_submission_stage() FROM PUBLIC, anon, authenticated;
+REVOKE ALL ON FUNCTION public.enforce_container_stage() FROM PUBLIC, anon, authenticated;
+REVOKE ALL ON FUNCTION public.allowed_submission_next(submission_stage) FROM PUBLIC, anon;
+REVOKE ALL ON FUNCTION public.allowed_container_next(container_stage) FROM PUBLIC, anon;
+REVOKE ALL ON FUNCTION public.roles_for_submission_stage(submission_stage) FROM PUBLIC, anon;
+REVOKE ALL ON FUNCTION public.roles_for_container_stage(container_stage) FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION public.has_any_role(uuid, app_role[]) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.allowed_submission_next(submission_stage) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.allowed_container_next(container_stage) TO authenticated;
