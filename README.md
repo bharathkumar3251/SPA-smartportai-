@@ -1,1145 +1,1857 @@
 # 🚢 SmartPort AI
 
-## AI-Powered Smart Port Management, Congestion Prediction & Operational Decision Support Platform
+## AI-Powered Intelligent Port Management & Congestion Prevention Platform
 
-SmartPort AI is an integrated, database-driven **Smart Port Management System** designed to connect port stakeholders through a single end-to-end digital workflow.
+> **SmartPort AI** is an integrated web-based port management platform that connects shipping, documentation, port operations, terminal activities, truck movement, yard management, berth management, and cargo operations into a unified digital workflow.
 
-The platform coordinates shipping companies, port authorities, customs, terminal operations, warehouse operations, trucking operators, logistics teams, AI administrators, data analysts, and system administrators.
-
-Unlike a traditional port system that mainly records operational activities, SmartPort AI combines **real-time operational workflow management with AI/ML-based risk analysis and congestion prediction** to help identify bottlenecks earlier and support preventive operational decisions.
+This document is intended as the **technical/project documentation for judges, developers, evaluators, and technical reviewers**. It provides deeper implementation details beyond the project presentation.
 
 ---
 
-# 🎯 Project Objective
+## 1. Project Overview
 
-The primary objective of SmartPort AI is to transform fragmented and reactive port operations into a:
+Modern ports operate as interconnected ecosystems involving multiple stakeholders:
 
-> **Connected → Visible → Predictive → Coordinated → Preventive**
+* Shipping companies
+* Port authorities
+* Terminal operators
+* Customs and compliance teams
+* Truck operators
+* Yard management teams
+* Berth management teams
+* Cargo handling teams
+* Logistics coordinators
 
-port management ecosystem.
+A delay in one operation can propagate through the entire port. For example, a delayed vessel can affect berth allocation, container unloading, yard capacity, truck scheduling, cargo movement, and subsequent vessel operations.
 
-The platform aims to help reduce:
-
-- Vessel waiting time
-- Berth conflicts
-- Container handling delays
-- Yard congestion
-- Truck queues
-- Gate congestion
-- Documentation delays
-- Customs clearance delays
-- Poor coordination between stakeholders
-- Operational bottlenecks
-
-The system does not simply display congestion after it occurs.
-
-It continuously collects operational information, analyses current conditions, predicts potential risks, and provides decision support so that operational teams can take action earlier.
-
----
-
-# 🚨 Problem Statement
-
-Modern ports involve many stakeholders and operational stages.
-
-A single shipment can involve:
-
-**Shipping Company → Port Authority → Customs → Terminal → Warehouse → Trucking → Gate → Logistics**
-
-When these activities are handled through disconnected systems, spreadsheets, emails, manual approvals, and isolated operational tools, several problems can occur:
-
-- Delayed vessel approvals
-- Berth scheduling conflicts
-- Missing documentation
-- Delayed customs clearance
-- Uncoordinated container movement
-- Yard overcrowding
-- Truck appointment conflicts
-- Gate queues
-- Lack of real-time visibility
-- Delayed decision-making
-- Reactive congestion management
-
-A delay at one stage can propagate into several downstream operations.
-
-For example:
-
-```
-Delayed Port Approval
-        ↓
-Delayed Berth Allocation
-        ↓
-Delayed Vessel Handling
-        ↓
-Delayed Container Unloading
-        ↓
-Yard Congestion
-        ↓
-Delayed Warehouse Movement
-        ↓
-Truck Queue Formation
-        ↓
-Delivery Delay
-
-```
-
-
-💡 Proposed Solution
-
-SmartPort AI provides a centralized platform where every major operational activity is connected through a common workflow and database.
+SmartPort AI addresses this problem by creating a **single digital operational workflow** where information is captured once and made available to the appropriate stakeholders according to their roles.
 
 The platform combines:
 
-Role-based operational portals
-Real-time database persistence
-Workflow state management
-Document management
-Approval management
-Berth allocation
-Container tracking
-Yard operations
-Warehouse operations
-Truck and gate operations
-Logistics tracking
-Notifications
-Audit logging
-AI verification
-ML-based risk prediction
-Congestion analysis
-Analytics and operational dashboards
+1. Role-based authentication
+2. Shipment management
+3. Digital document submission
+4. Port operation management
+5. Berth management
+6. Yard management
+7. Truck management
+8. Cargo management
+9. Operational status tracking
+10. Congestion monitoring
+11. AI-assisted decision support
+12. Centralized dashboards
+13. Database-backed workflow management
 
-The central concept is:
+The objective is not simply to digitize individual port activities, but to connect them into a **continuous operational information flow**.
 
-OPERATIONAL DATA
-       ↓
-DATA VALIDATION
-       ↓
-WORKFLOW PROCESSING
-       ↓
-REAL-TIME MONITORING
-       ↓
-AI / ML ANALYSIS
-       ↓
-RISK & CONGESTION PREDICTION
-       ↓
-BOTTLENECK IDENTIFICATION
-       ↓
-DECISION SUPPORT
-       ↓
-OPERATIONAL ACTION
-       ↓
-CONTINUOUS MONITORING
-🏗️ Complete Port Workflow
+---
 
-The implemented platform follows an interconnected operational workflow.
+# 2. Problem Definition
 
-┌──────────────────────────┐
-│     SHIPPING COMPANY     │
-│ Vessel & Cargo Submission│
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│   DOCUMENT MANAGEMENT    │
-│ Upload & Verification    │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│      AI VERIFICATION     │
-│ Risk & Document Analysis │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│     PORT AUTHORITY       │
-│ Review & Approval        │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│     BERTH MANAGEMENT     │
-│ Allocation & Scheduling  │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│      CUSTOMS             │
-│ Clearance / Inspection   │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│   TERMINAL OPERATIONS    │
-│ Unloading & Manifest     │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│    YARD OPERATIONS       │
-│ Container Placement      │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│ WAREHOUSE OPERATIONS     │
-│ Storage & Dispatch       │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│    TRUCKING OPERATIONS   │
-│ Truck & Driver Assignment│
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│      GATE OPERATIONS     │
-│ Gate-in / Transit / Out  │
-└─────────────┬────────────┘
-              ↓
-┌──────────────────────────┐
-│   LOGISTICS CONTROL      │
-│ Tracking & Delivery      │
-└─────────────┬────────────┘
-              ↓
-        ┌──────────────┐
-        │  DELIVERED   │
-        └──────────────┘
+Traditional port workflows often involve disconnected systems, manual communication, spreadsheets, phone calls, emails, and repeated data entry.
 
-At every important stage, the system records:
+This creates several technical and operational problems:
 
-Current status
-Responsible stakeholder
-Timestamp
-Workflow event
-Database change
-Notification
-Audit information
-🧩 10 Operational Portals
+### 2.1 Fragmented Information
 
-SmartPort AI contains 10 interconnected portals.
+Shipment, vessel, truck, yard, berth, cargo, and documentation information may exist in different systems or organizational departments.
 
-1. 🚢 Shipping Line Portal
+### 2.2 Manual Documentation
 
-Route:
+Important shipment documents may be submitted and verified manually, increasing processing time and the possibility of missing or inconsistent information.
 
-/app/shipping
-/app/documents
+### 2.3 Limited Operational Visibility
 
-The Shipping Line portal allows users to:
+A stakeholder may know the status of their own operation but may not have visibility into upstream or downstream activities affecting it.
 
-Create vessel submissions
-Enter vessel information
-Enter IMO number
-Enter voyage number
-Enter cargo information
-Enter container quantities
-Provide ETA / ETD
-Save drafts
-Edit submissions
-Upload required documents
-Track document verification
-View approval status
-Receive modification requests
-Resubmit corrected documents
-Monitor shipment progress
+### 2.4 Poor Coordination
 
-A successful submission enters the central workflow and becomes available to the Port Authority.
+Truck arrival, yard capacity, berth availability, cargo handling, and vessel schedules are interdependent. Without centralized information, coordination becomes difficult.
 
-2. ⚓ Port Authority Portal
+### 2.5 Reactive Congestion Management
 
-Routes:
+Congestion is frequently handled after queues and delays have already become significant.
 
-/app/port-authority
-/app/approvals
+### 2.6 Data Duplication
 
-The Port Authority manages vessel approval and berth coordination.
+The same shipment information can be entered repeatedly by different stakeholders.
 
-Functions include:
+### 2.7 Delayed Decision-Making
 
-Review incoming vessel submissions
-Inspect submitted information
-Review AI risk information
-Review document status
-Approve submissions
-Reject submissions
-Request modifications
-Add approval/rejection notes
-Allocate available berths
-Monitor berth occupancy
-Detect potential berth conflicts
-Monitor operational congestion
+Port operators require timely operational information to determine where intervention is necessary.
 
-The Port Authority is a critical decision point in the workflow.
+---
 
-Example:
+# 3. Proposed Solution
 
-Shipping Submission
-        ↓
-Authority Review
-        ↓
-Approve
-        ↓
-Berth Allocation
-        ↓
-Customs
-3. 🛃 Customs Clearance Portal
+SmartPort AI provides a centralized platform in which operational information moves through a controlled, role-based workflow.
 
-Route:
-
-/app/customs
-
-Customs officers receive shipments after Port Authority approval.
-
-Functions include:
-
-Review customs queue
-Inspect cargo information
-Check dangerous goods / IMDG information
-Review documents
-Approve customs clearance
-Hold shipment for inspection
-Record inspection notes
-Reject clearance
-Trigger workflow notifications
-Maintain customs audit history
-
-Example:
-
-Authority Approved
-        ↓
-Customs Review
-        ↓
- ┌──────┴──────┐
- ↓             ↓
-Clear         Hold
- ↓             ↓
-Terminal     Inspection
-4. 🏗️ Terminal Operations Portal
-
-Route:
-
-/app/terminal
-
-The Terminal Operations portal manages vessel and container handling.
-
-Functions include:
-
-View approved vessel calls
-Schedule unloading
-Register container manifests
-Create container records
-Assign cranes
-Assign operational resources
-Assign yard slots
-Track container movement
-Update container operational stages
-Release cargo toward warehouse operations
-
-Container lifecycle:
-
-AT VESSEL
-    ↓
-UNLOADING
-    ↓
-YARD
-    ↓
-WAREHOUSE RECEIVED
-5. 🏭 Warehouse Operations Portal
-
-Route:
-
-/app/warehouse
-
-Warehouse teams manage containers received from terminal operations.
-
-Functions include:
-
-Receive containers
-Allocate storage slots
-Manage stored cargo
-Identify dangerous goods
-Prepare cargo for dispatch
-Update container status
-Release containers for trucking
-
-Container lifecycle:
-
-WAREHOUSE RECEIVED
-        ↓
-STORED
-        ↓
-DISPATCH READY
-
-When cargo becomes dispatch-ready, the trucking workflow can begin.
-
-6. 🚛 Trucking Fleet Portal
-
-Route:
-
-/app/truck
-
-The Trucking portal coordinates transportation of containers outside the terminal.
-
-Functions include:
-
-View dispatch-ready containers
-Assign truck
-Enter truck registration
-Assign driver
-Schedule pickup
-Validate pickup appointment
-Start trip
-Track transportation status
-
-Container lifecycle:
-
-DISPATCH READY
-       ↓
-ASSIGNED TRUCK
-       ↓
-IN TRANSIT
-7. 🚪 Gate Operations
-
-Gate operations are integrated into the transportation workflow.
-
-The system validates:
-
-Truck appointment
-Gate-in sequence
-Movement state
-Gate-out sequence
-Invalid movement attempts
-Duplicate gate-out attempts
-
-This helps prevent unnecessary truck queues and incorrect gate movements.
-
-Example:
-
-Appointment
-    ↓
-Gate In
-    ↓
-Terminal Movement
-    ↓
-Gate Out
-    ↓
-In Transit
-
-Invalid operational sequences are rejected by the workflow/state engine.
-
-8. 📦 Logistics Control Tower
-
-Route:
-
-/app/logistics
-
-The Logistics portal provides cross-stage visibility.
-
-Functions include:
-
-Track active shipments
-Track container movement
-Monitor transportation
-Monitor delivery status
-Confirm final delivery
-Record proof-of-delivery information
-Close completed consignments
-
-Final lifecycle:
-
-IN TRANSIT
-     ↓
-DELIVERY
-     ↓
-PROOF OF DELIVERY
-     ↓
-DELIVERED
-9. 🤖 AI Administrator Portal
-
-Route:
-
-/app/ai
-
-The AI Administrator portal manages the machine learning and intelligence layer.
-
-Functions include:
-
-Feature extraction
-Dataset preparation
-Model training
-Model evaluation
-Model deployment
-Risk prediction
-Delay prediction
-Congestion analysis
-Feature importance
-Explainability
-Model telemetry
-
-Operational features include:
-
-Container Count
-Dangerous Goods
-Document Completeness
-Terminal Workload
-IMO Validation
-ETA Lead Time
-Expired Documents
-
-These features are used to analyse operational risk.
-
-10. 📊 Data Analyst & Super Admin Portals
-Data Analyst
-
-Route:
-
-/app/analytics
-
-Provides:
-
-Operational KPIs
-Shipment volume
-Processing times
-Clearance rates
-Container statistics
-Throughput trends
-Delivery statistics
-Congestion-related analytics
-CSV export
-Super Admin
-
-Route:
-
-/app/admin
-
-Provides:
-
-User management
-Role management
-User activation/deactivation
-Role approval
-System monitoring
-Audit log inspection
-Administrative controls
-🤖 Artificial Intelligence & Machine Learning
-
-SmartPort AI includes a machine learning pipeline connected to operational data.
-
-The ML pipeline extracts operational features from the platform database.
-
-Feature Set
-
-The current feature extraction pipeline uses:
-
-Feature	Description
-containerCount	Number of containers / TEU volume
-dangerousGoods	IMDG / dangerous goods indicator
-docCompleteness	Required document completion ratio
-terminalWorkload	Current operational workload
-hasImo	IMO number validation
-etaLeadDays	ETA lead time
-hasExpiredDocs	Expired document indicator
-📈 ML Predictions
-
-The system is designed to provide:
-
-Risk Prediction
-
-A risk score from:
-
-0 ─────────────────────── 100
-LOW                       HIGH
-Delay Prediction
-
-Prediction of potential operational delay in hours.
-
-Congestion Prediction
-
-Analysis of operational conditions to identify possible congestion risk.
-
-🧠 Explainable AI
-
-SmartPort AI does not only generate a prediction.
-
-It also identifies which operational factors contributed to the risk.
-
-Example:
-
-CONGESTION / OPERATIONAL RISK
-            ↓
-       Risk Score: 72
-            ↓
- ┌─────────────────────────┐
- │ Main Contributing Factors│
- └─────────────────────────┘
-            ↓
-Dangerous Goods       +34.2%
-Document Completeness +25.8%
-Cargo Volume          +16.4%
-Terminal Workload     +13.1%
-Expired Documents     +10.5%
-
-This allows operational teams to understand why a shipment or operation has elevated risk.
-
-🚦 How SmartPort AI Helps Reduce Port Congestion
-
-SmartPort AI is designed around preventive congestion management.
-
-It does not physically remove congestion by itself.
-
-Instead, it helps operational teams identify conditions that can create congestion and take corrective action earlier.
-
-For example:
-
-High Vessel Volume
-       +
-High Berth Occupancy
-       +
-High Container Volume
-       +
-High Yard Workload
-       +
-High Truck Demand
-       ↓
-AI Detects Increasing Risk
-       ↓
-Operational Team Receives Alert
-       ↓
-Potential Bottleneck Identified
-       ↓
-Operational Adjustment
-       ↓
-Reduced Probability of Queue Formation
-
-Possible operational responses include:
-
-Adjusting vessel scheduling
-Selecting another available berth
-Prioritizing certain operations
-Managing container movement
-Coordinating warehouse release
-Managing truck appointments
-Controlling gate flow
-Monitoring yard capacity
-
-Therefore, the platform follows:
-
-Predict → Identify → Coordinate → Act → Monitor
-
-rather than:
-
-Congestion → Queue → Delay → React
-
-🏙️ How SmartPort AI Helps Urban Areas
-
-Port congestion can affect the surrounding urban transportation network.
-
-When port operations become congested:
-
-Port Congestion
-      ↓
-Truck Queue
-      ↓
-More Heavy Vehicles Near Port
-      ↓
-Road Congestion
-      ↓
-Longer Travel Times
-      ↓
-Fuel Consumption & Emissions
-      ↓
-Urban Traffic Impact
-
-SmartPort AI can help reduce this impact by improving coordination between:
-
-Cargo availability
-Truck appointments
-Gate operations
-Container readiness
-Warehouse operations
-Port capacity
-
-For example:
-
-Container Not Ready
-        ↓
-Traditional System:
-Truck Arrives
-        ↓
-Truck Waits
-        ↓
-Queue Forms
-
-
-SmartPort AI:
-Container Status Monitored
-        ↓
-Dispatch Readiness Confirmed
-        ↓
-Truck Appointment Coordinated
-        ↓
-Truck Arrives When Cargo Is Ready
-        ↓
-Reduced Unnecessary Waiting
-
-This can contribute to:
-
-Reduced truck waiting
-Better traffic flow around port areas
-Reduced unnecessary vehicle movement
-Improved logistics efficiency
-Lower idling time
-Potential reduction in emissions
-Better coordination between port and urban transport
-
-SmartPort AI therefore acts as a port-to-urban logistics coordination layer.
-
-🔄 Central Workflow State Engine
-
-The platform uses a controlled workflow/state engine.
-
-Shipment stages include operational states such as:
-
-UPLOADED
-   ↓
-AUTHORITY REVIEW
-   ↓
-AUTHORITY APPROVED
-   ↓
-BERTH ASSIGNED
-   ↓
-CUSTOMS REVIEW
-   ↓
-CUSTOMS CLEARED
-   ↓
-TERMINAL SCHEDULED
-   ↓
-UNLOADING
-   ↓
-WAREHOUSE RECEIVED
-   ↓
-DISPATCH READY
-   ↓
-IN TRANSIT
-   ↓
-DELIVERED
-
-Alternative paths are supported for operational exceptions.
-
-Example:
-
-AUTHORITY REVIEW
-       ↓
-MODIFICATION REQUESTED
-       ↓
-SHIPPING CORRECTION
-       ↓
-RESUBMISSION
-       ↓
-AUTHORITY REVIEW
-
-Customs can also place shipments on hold:
-
-CUSTOMS REVIEW
-       ↓
-CUSTOMS HOLD
-       ↓
-INSPECTION
-       ↓
-CUSTOMS CLEARANCE
-
-Invalid state transitions are rejected.
-
-🔔 Real-Time Notifications
-
-Workflow transitions generate targeted notifications.
-
-Examples:
-
-Shipping Submission
-        ↓
-Port Authority Notification
-Port Approval
-        ↓
-Customs Notification
-Customs Clearance
-        ↓
-Terminal Notification
-Dispatch Ready
-        ↓
-Trucking Notification
-Trip Started
-        ↓
-Logistics Notification
-
-Notifications help stakeholders act without manually checking every portal.
-
-📝 Audit Trail
-
-Important operational activities are recorded in the audit system.
-
-Audit events include:
-
-Submission creation
-Document upload
-Document verification
-Approval
-Rejection
-Modification request
-Customs decision
-Container movement
-Truck assignment
-Delivery confirmation
-Role changes
-Administrative actions
-ML training actions
-
-This provides operational traceability.
-
-🗄️ Database Architecture
-
-SmartPort AI uses Supabase/PostgreSQL as the primary backend data platform.
-
-Core database entities include:
-
-profiles
-user_roles
-shipment_submissions
-submission_documents
-ai_verifications
-containers
-workflow_events
-notifications
-audit_logs
-berths
-
-The database stores real operational state rather than relying on temporary frontend mock data.
-
-🔐 Security & Authorization
-
-SmartPort AI implements role-based authorization and database-level security.
-
-Security mechanisms include:
-
+```text
+User
+  ↓
 Authentication
-Role-based access control
-PostgreSQL Row-Level Security
-Database state validation
-Protected document access
-Audit logging
-Controlled administrative operations
-Input validation
+  ↓
+Role-Based Access Control
+  ↓
+Role Dashboard
+  ↓
+Operational Module
+  ↓
+Database
+  ↓
+Cross-Module Data Flow
+  ↓
+Monitoring & Analytics
+  ↓
+AI-Assisted Congestion Intelligence
+  ↓
+Alerts / Recommendations / Decisions
+```
 
-Different stakeholders can access only the operations permitted for their roles.
+Instead of treating port activities as independent modules, SmartPort AI connects them.
+
+For example:
+
+```text
+Shipment Submission
+       ↓
+Document Submission
+       ↓
+Verification
+       ↓
+Vessel / Voyage Information
+       ↓
+Berth Planning
+       ↓
+Cargo Operation
+       ↓
+Yard Allocation
+       ↓
+Truck Movement
+       ↓
+Gate / Terminal Operation
+       ↓
+Operational Monitoring
+       ↓
+Congestion Analysis
+```
+
+This enables the system to maintain an operational context around each shipment.
+
+---
+
+# 4. Core Design Principle
+
+The central design principle of SmartPort AI is:
+
+> **Capture operational information once, store it centrally, validate it, and make it available to the stakeholders who need it.**
+
+The platform therefore follows five major principles:
+
+### Centralization
+
+Operational information is maintained through a unified application and database.
+
+### Role Isolation
+
+Users only access functionality appropriate to their assigned role.
+
+### Workflow Continuity
+
+Activities are connected rather than treated as isolated forms.
+
+### Data-Driven Decisions
+
+Operational data can be converted into metrics, alerts, and AI-assisted insights.
+
+### Extensibility
+
+Additional port modules, predictive models, external APIs, IoT feeds, and enterprise integrations can be added without redesigning the entire platform.
+
+---
+
+# 5. System Architecture
+
+SmartPort AI follows a layered web-application architecture.
+
+```text
+┌─────────────────────────────────────────────┐
+│              USER INTERFACE                 │
+│                                             │
+│ Dashboards | Forms | Tables | Monitoring    │
+└───────────────────┬─────────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────────┐
+│          AUTHENTICATION & RBAC               │
+│                                             │
+│ Login | Registration | Approval | Roles      │
+└───────────────────┬─────────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────────┐
+│            APPLICATION LOGIC                │
+│                                             │
+│ Shipment | Documents | Berth | Yard         │
+│ Trucks | Cargo | Port Operations            │
+└───────────────────┬─────────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────────┐
+│             DATA / API LAYER                │
+│                                             │
+│ Validation | CRUD | Business Rules          │
+│ Status Updates | Analytics                  │
+└───────────────────┬─────────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────────┐
+│                 DATABASE                    │
+│                                             │
+│ Users | Shipments | Documents | Operations  │
+│ Berths | Trucks | Yard | Cargo | Events     │
+└───────────────────┬─────────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────────┐
+│          INTELLIGENCE LAYER                 │
+│                                             │
+│ Metrics | Risk Detection | Prediction       │
+│ Congestion Analysis | Recommendations       │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+# 6. Authentication Architecture
+
+Authentication is the first layer of the platform.
+
+The system prevents unauthorized users from directly accessing operational dashboards.
+
+### Authentication Flow
+
+```text
+User
+ ↓
+Login / Registration
+ ↓
+Credential Validation
+ ↓
+Authentication
+ ↓
+Role Identification
+ ↓
+Authorization
+ ↓
+Role Dashboard
+```
+
+Registration and access are controlled so that users do not automatically receive unrestricted access to operational functions.
+
+---
+
+# 7. Role-Based Access Control
+
+SmartPort AI uses **Role-Based Access Control (RBAC)**.
+
+Instead of giving every user access to every feature, permissions are associated with the user's operational role.
+
+A simplified model is:
+
+```text
+User
+ ├── Identity
+ ├── Authentication Status
+ ├── Account Status
+ └── Assigned Role
+          ↓
+      Permissions
+          ↓
+      Dashboard
+          ↓
+      Modules
+```
+
+Example roles include:
+
+| Role                 | Main Responsibility                       |
+| -------------------- | ----------------------------------------- |
+| Super Admin          | Platform-wide administration              |
+| Port Authority       | Overall port operations                   |
+| Shipping Company     | Shipment and vessel-related information   |
+| Terminal Operations  | Terminal and cargo operations             |
+| Truck Operator       | Truck and movement information            |
+| Yard Management      | Yard capacity and container allocation    |
+| Berth Management     | Berth scheduling and utilization          |
+| Cargo Operations     | Cargo handling activities                 |
+| Customs / Compliance | Documentation and compliance verification |
+
+The exact permission set can be extended as additional operational roles are introduced.
+
+---
+
+# 8. Registration and Approval Workflow
+
+The platform supports controlled user onboarding.
+
+```text
+Registration
+     ↓
+User Account Created
+     ↓
+Account Pending Approval
+     ↓
+Administrator Review
+     ↓
+Approve / Reject
+     ↓
+Approved User
+     ↓
+Role-Based Access
+```
+
+This prevents unauthorized registration from immediately providing access to sensitive operational functionality.
+
+---
+
+# 9. Super Admin Architecture
+
+The Super Admin acts as the administrative control layer.
+
+Administrative functionality includes:
+
+* User management
+* Registration approval
+* Role management
+* Account status management
+* Operational visibility
+* System-level monitoring
+* Access control
+
+The administrative dashboard provides centralized oversight rather than requiring administrators to inspect individual modules separately.
+
+---
+
+# 10. Shipment Management
+
+Shipment management is one of the primary data-entry points of SmartPort AI.
+
+A shipping user can submit shipment information through a structured form.
+
+Typical shipment information includes:
+
+* Vessel name
+* IMO number
+* Voyage number
+* Cargo type
+* Container quantity
+* Origin
+* ETA
+* ETD
+* Dangerous goods information
+* Shipment-related metadata
+
+After submission, the system generates a unique shipment reference.
+
+### Shipment Flow
+
+```text
+Shipping Company
+       ↓
+Shipment Form
+       ↓
+Input Validation
+       ↓
+Database Insert
+       ↓
+Unique Reference Generation
+       ↓
+Shipment Record
+       ↓
+Operational Workflow
+```
+
+The reference code allows the shipment to be tracked throughout the system.
+
+---
+
+# 11. Shipment Data Model
+
+A conceptual shipment record can contain:
+
+```text
+Shipment
+├── Shipment ID
+├── Reference Code
+├── Vessel Name
+├── IMO Number
+├── Voyage Number
+├── Cargo Type
+├── Container Count
+├── Origin
+├── ETA
+├── ETD
+├── Dangerous Goods Flag
+├── Status
+├── Created By
+├── Created At
+└── Updated At
+```
+
+This structure provides a common operational identity that can be referenced by other modules.
+
+---
+
+# 12. Digital Document Management
+
+Documentation is integrated into the shipment workflow.
+
+Instead of treating documents as independent files, they are associated with operational records.
+
+```text
+Shipment
+   ↓
+Document Submission
+   ↓
+Document Association
+   ↓
+Verification
+   ↓
+Approval / Rejection
+   ↓
+Operational Processing
+```
+
+This allows the platform to track not only the shipment but also its documentation state.
+
+Possible document states include:
+
+```text
+Pending
+   ↓
+Submitted
+   ↓
+Under Review
+   ↓
+Verified
+   ↓
+Rejected / Requires Correction
+```
+
+This workflow can be extended to support document types such as:
+
+* Bill of Lading
+* Commercial Invoice
+* Packing List
+* Customs documents
+* Dangerous Goods declarations
+* Other shipment-specific documentation
+
+---
+
+# 13. Port Operations Module
+
+The port operations layer provides an overall view of operational activities.
+
+It connects:
+
+* Vessel operations
+* Berth availability
+* Cargo operations
+* Yard status
+* Truck movement
+* Shipment status
+* Operational events
+
+This creates a common operational picture for authorized port personnel.
+
+---
+
+# 14. Berth Management
+
+Berth management handles berth-related operational information.
+
+A conceptual berth workflow is:
+
+```text
+Vessel ETA
+    ↓
+Berth Availability
+    ↓
+Berth Assignment
+    ↓
+Arrival
+    ↓
+Berthing
+    ↓
+Cargo Operation
+    ↓
+Departure
+    ↓
+Berth Released
+```
+
+The system can monitor:
+
+* Berth availability
+* Assigned vessel
+* Expected arrival
+* Berthing status
+* Estimated departure
+* Occupancy
+* Delay indicators
+
+Berth utilization is an important signal for congestion analysis because berth saturation can create downstream operational pressure.
+
+---
+
+# 15. Yard Management
+
+The yard module manages container/cargo storage information.
+
+Conceptually:
+
+```text
+Cargo Arrival
+     ↓
+Yard Allocation
+     ↓
+Container Stored
+     ↓
+Yard Occupancy Updated
+     ↓
+Retrieval Request
+     ↓
+Container Movement
+     ↓
+Yard Capacity Released
+```
+
+Important operational indicators include:
+
+* Total yard capacity
+* Occupied capacity
+* Available capacity
+* Container location
+* Storage duration
+* Incoming cargo
+* Outgoing cargo
+
+A high occupancy ratio can be treated as a congestion-risk signal.
+
+---
+
+# 16. Truck Management
+
+Truck movement is a major component of landside port congestion.
+
+SmartPort AI provides a digital representation of truck-related operations.
+
+Typical workflow:
+
+```text
+Truck Request
+      ↓
+Shipment / Container Association
+      ↓
+Arrival Scheduling
+      ↓
+Gate Entry
+      ↓
+Terminal Movement
+      ↓
+Cargo Pickup / Drop
+      ↓
+Gate Exit
+```
+
+Relevant operational data includes:
+
+* Truck identifier
+* Associated shipment
+* Arrival time
+* Entry status
+* Cargo movement
+* Queue information
+* Exit status
+* Waiting duration
+
+This information can contribute to congestion analysis.
+
+---
+
+# 17. Cargo Management
+
+Cargo operations connect shipment information with physical cargo movement.
+
+The system can maintain information such as:
+
+* Cargo type
+* Quantity
+* Container count
+* Handling status
+* Associated shipment
+* Loading status
+* Unloading status
+* Movement status
+
+A cargo operation may follow:
+
+```text
+Shipment
+   ↓
+Cargo Received
+   ↓
+Handling
+   ↓
+Loading / Unloading
+   ↓
+Yard / Truck Transfer
+   ↓
+Operation Completed
+```
+
+---
+
+# 18. Operational Status Model
+
+A common status model allows different modules to communicate operational state.
 
 Example:
 
-Shipping User
-     ✕
-Port Authority Approval
+```text
+PENDING
+   ↓
+SUBMITTED
+   ↓
+UNDER_REVIEW
+   ↓
+APPROVED
+   ↓
+SCHEDULED
+   ↓
+IN_PROGRESS
+   ↓
+COMPLETED
+```
 
+Exception states can include:
 
-Trucking User
-     ✕
-Customs Clearance
+```text
+REJECTED
+DELAYED
+CANCELLED
+REQUIRES_ACTION
+```
 
+A standardized state model is useful for analytics because the system can calculate durations between states.
 
-Non-Admin User
-     ✕
-Audit Log Modification
+---
 
-Unauthorized actions are rejected by the backend/database security layer.
+# 19. Database Architecture
 
-⚓ Berth Conflict Prevention
+The database acts as the central source of operational truth.
 
-Berth allocation is an important part of congestion prevention.
+A conceptual relational structure is:
 
-The system tracks berth usage and prevents conflicting active allocations.
+```text
+users
+  │
+  ├──────── roles
+  │
+  └──────── permissions
+       
+shipments
+  │
+  ├──────── documents
+  ├──────── cargo
+  ├──────── vessel operations
+  └──────── truck movements
 
-Example:
+berths
+  │
+  └──────── berth assignments
 
-BERTH PPT-B01
+yard
+  │
+  ├──────── containers
+  └──────── yard movements
+
+trucks
+  │
+  └──────── truck events
+
+operations
+  │
+  └──────── operational events
+```
+
+The exact schema can evolve as the platform expands.
+
+---
+
+# 20. Data Relationships
+
+The system is designed around relationships between operational entities.
+
+For example:
+
+```text
+User
+ ↓
+Shipment
+ ↓
+Vessel / Voyage
+ ↓
+Cargo
+ ↓
+Berth
+ ↓
+Yard
+ ↓
+Truck
+ ↓
+Gate / Terminal Event
+```
+
+This relationship chain is important because congestion is rarely caused by one isolated record.
+
+Instead, congestion emerges from interactions between multiple operational variables.
+
+---
+
+# 21. API / Application Layer
+
+The application layer is responsible for handling communication between the frontend and backend/database services.
+
+Typical operations include:
+
+### Create
+
+```text
+POST
+Create shipment
+Create document
+Create truck record
+Create berth assignment
+```
+
+### Read
+
+```text
+GET
+Retrieve shipment
+Retrieve dashboard data
+Retrieve berth status
+Retrieve yard status
+Retrieve truck activity
+```
+
+### Update
+
+```text
+UPDATE / PATCH
+Update shipment status
+Update document verification
+Update berth status
+Update truck movement
+Update yard occupancy
+```
+
+### Delete / Deactivate
+
+Where appropriate, records can be deleted or logically deactivated according to business rules.
+
+---
+
+# 22. Input Validation
+
+Input validation is applied before operational data is stored.
+
+Examples include:
+
+* Required field validation
+* Numeric validation
+* Date/time validation
+* Container count validation
+* Identifier validation
+* File validation
+* Role validation
+* Status transition validation
+
+The objective is to prevent malformed operational information from entering downstream workflows.
+
+---
+
+# 23. AI and Congestion Intelligence
+
+The AI layer is designed around the idea that port congestion can be treated as a **multi-variable operational prediction problem**.
+
+Rather than relying on a single indicator, the system can combine signals such as:
+
+```text
+Vessel Delays
+      +
+Berth Occupancy
+      +
+Yard Occupancy
+      +
+Truck Queue / Waiting Time
+      +
+Cargo Volume
+      +
+Container Movement
+      +
+Operational Delays
       ↓
-Vessel A Assigned
-      ↓
-Berth Occupied
-      ↓
-Vessel B Requests Same Berth
-      ↓
-Conflict Detected
-      ↓
-Assignment Rejected
+Congestion Risk Assessment
+```
 
-This helps prevent vessel scheduling conflicts and unnecessary waiting.
+This creates a foundation for predictive rather than purely reactive port management.
 
-📦 Container Lifecycle
+---
 
-Each container is tracked through operational stages.
+# 24. Congestion Risk Model
 
-AT VESSEL
-     ↓
-UNLOADING
-     ↓
-YARD
-     ↓
-WAREHOUSE RECEIVED
-     ↓
-STORED
-     ↓
-DISPATCH READY
-     ↓
-ASSIGNED TRUCK
-     ↓
-IN TRANSIT
-     ↓
-DELIVERED
+A conceptual congestion score can be represented as:
 
-This provides visibility from vessel unloading to final delivery.
+```text
+Congestion Risk =
+f(
+    berth utilization,
+    yard occupancy,
+    truck waiting time,
+    vessel delay,
+    cargo volume,
+    container throughput,
+    operational delay
+)
+```
 
-📊 Operational Analytics
+The exact weighting or machine-learning model can be changed without changing the rest of the platform.
 
-The analytics layer provides operational visibility across the platform.
+The output can be represented as:
 
-Important indicators include:
+```text
+LOW RISK
+MEDIUM RISK
+HIGH RISK
+CRITICAL RISK
+```
 
-Total submissions
-Active shipments
-Delivered shipments
-Container volume
-Active containers
-Berth occupancy
-Customs workload
-Warehouse workload
-Dispatch-ready containers
-In-transit containers
-Processing times
-Throughput trends
-Operational risk
+The purpose of the risk score is to help operational teams identify areas requiring attention.
 
-The platform uses server-side aggregation for important dashboard metrics to reduce unnecessary data transfer and client-side processing.
+---
 
-⚡ Performance Optimization
+# 25. AI Data Pipeline
 
-The system includes database and frontend performance optimizations.
+The intelligence pipeline can be structured as:
 
-Implemented optimizations include:
-
-Composite database indexes
-Server-side aggregation
-Dashboard summary RPC
-TanStack Query caching
-Pagination
-Memoized filtering
-Optimized realtime subscriptions
-Subscription cleanup
-Skeleton loading states
-Reduced unnecessary database requests
-
-Example database indexes include:
-
-shipment_submissions
-    (stage, created_at)
-
-
-containers
-    (submission_id, stage)
-
-
-notifications
-    (user_id, read, created_at)
-
-
-audit_logs
-    (created_at)
-🧪 Functional Validation
-
-The platform has been designed and tested around real end-to-end workflow scenarios.
-
-Example test:
-
-Create Shipment
-      ↓
-Upload Documents
-      ↓
-AI Verification
-      ↓
-Port Authority Approval
-      ↓
-Berth Allocation
-      ↓
-Customs Clearance
-      ↓
-Terminal Scheduling
-      ↓
-Container Registration
-      ↓
-Warehouse Storage
-      ↓
-Dispatch Ready
-      ↓
-Truck Assignment
-      ↓
-Trip Start
-      ↓
-Delivery Confirmation
-      ↓
-DELIVERED
-
-The workflow is intended to operate through the application interface and database workflow engine without requiring manual database state manipulation.
-
-🔁 Rejection & Resubmission Workflow
-
-SmartPort AI also supports exception handling.
-
-Example:
-
-Shipping Submission
-        ↓
-Port Authority Review
-        ↓
-Missing Document
-        ↓
-Modification Requested
-        ↓
-Shipping User Notified
-        ↓
-Missing Document Uploaded
-        ↓
-Resubmit
-        ↓
-Port Authority Review
-        ↓
-Approval
-
-This prevents rejected shipments from becoming dead-end records.
-
-🧠 Intelligent Operational Loop
-
-The overall intelligence model follows:
-
-┌──────────────┐
-│    OBSERVE   │
-└──────┬───────┘
+```text
+Operational Database
        ↓
-┌──────────────┐
-│    ANALYSE   │
-└──────┬───────┘
+Data Extraction
        ↓
-┌──────────────┐
-│    PREDICT   │
-└──────┬───────┘
+Data Cleaning
        ↓
-┌──────────────┐
-│    IDENTIFY  │
-│   BOTTLENECK │
-└──────┬───────┘
+Feature Preparation
        ↓
-┌──────────────┐
-│   RECOMMEND  │
-└──────┬───────┘
+Feature Generation
        ↓
-┌──────────────┐
-│     ACT      │
-└──────┬───────┘
+Model / Rule Processing
        ↓
-┌──────────────┐
-│    MONITOR   │
-└──────┬───────┘
-       │
-       └──────────────→ OBSERVE
+Congestion Risk
+       ↓
+Recommendation / Alert
+       ↓
+Dashboard
+```
 
-This creates a continuous operational intelligence cycle.
+Potential features include:
 
-🏗️ System Architecture
-┌──────────────────────────────────────────┐
-│              USER INTERFACE              │
-│          React + TypeScript              │
-│                                          │
-│  10 Role-Based Operational Portals       │
-└───────────────────┬──────────────────────┘
-                    ↓
-┌──────────────────────────────────────────┐
-│       AUTHENTICATION & RBAC              │
-│     Session / Role / Permission          │
-└───────────────────┬──────────────────────┘
-                    ↓
-┌──────────────────────────────────────────┐
-│          APPLICATION WORKFLOW             │
-│       State Engine / Notifications        │
-│        Audit / Operational Logic          │
-└───────────────────┬──────────────────────┘
-                    ↓
-┌──────────────────────────────────────────┐
-│             SUPABASE                     │
-│                                          │
-│ PostgreSQL | Auth | Storage | Realtime   │
-└───────────────┬───────────────┬──────────┘
-                ↓               ↓
-       ┌──────────────┐  ┌───────────────┐
-       │ Operational  │  │  Documents    │
-       │   Database   │  │    Storage    │
-       └──────────────┘  └───────────────┘
-                ↓
-┌──────────────────────────────────────────┐
-│             AI / ML LAYER                │
-│                                          │
-│ Feature Extraction                       │
-│ Risk Prediction                          │
-│ Delay Prediction                         │
-│ Congestion Analysis                      │
-│ Explainability                           │
-└───────────────────┬──────────────────────┘
-                    ↓
-┌──────────────────────────────────────────┐
-│        DECISION SUPPORT & ALERTS          │
-│                                          │
-│ Risk Alerts | Recommendations | KPIs      │
-└──────────────────────────────────────────┘
-🛠️ Technology Stack
-Layer	Technology
-Frontend	React
-Programming Language	TypeScript
-Build Tool	Vite
-UI	React-based component system
-Data Fetching	TanStack Query
-Backend Platform	Supabase
-Database	PostgreSQL
-Authentication	Supabase Auth
-File Storage	Supabase Storage
-Realtime	Supabase Realtime
-Security	PostgreSQL RLS
-Workflow	Database + Application State Engine
-AI/ML	Machine Learning Pipeline
-Analytics	Database Aggregation + React Dashboards
-Version Control	Git / GitHub
-📁 Project Structure
+* Average truck waiting time
+* Current yard utilization
+* Berth occupancy percentage
+* Vessel delay duration
+* Number of active vessels
+* Cargo volume
+* Container throughput
+* Number of pending operations
+* Operational processing time
 
-The project structure is based on the implemented application architecture.
+---
 
+# 26. Feature Engineering
+
+Raw operational records are converted into measurable indicators.
+
+For example:
+
+### Yard Utilization
+
+```text
+Yard Utilization =
+Occupied Capacity / Total Capacity
+```
+
+### Berth Utilization
+
+```text
+Berth Utilization =
+Occupied Berth Time / Available Berth Time
+```
+
+### Truck Waiting Time
+
+```text
+Waiting Time =
+Gate Entry Time - Scheduled / Expected Arrival Time
+```
+
+### Vessel Delay
+
+```text
+Vessel Delay =
+Actual Event Time - Expected Event Time
+```
+
+These derived values are more useful for congestion intelligence than raw records alone.
+
+---
+
+# 27. Explainable AI Approach
+
+For operational systems, predictions should not simply return a number.
+
+The platform should provide understandable reasons behind a congestion alert.
+
+For example:
+
+```text
+HIGH CONGESTION RISK
+
+Primary contributing factors:
+• Yard utilization is high
+• Truck waiting time has increased
+• Berth occupancy is approaching capacity
+• Vessel turnaround is delayed
+```
+
+This makes the AI output more useful to port operators.
+
+---
+
+# 28. Decision-Support Workflow
+
+The system follows:
+
+```text
+Data
+ ↓
+Analysis
+ ↓
+Risk Detection
+ ↓
+Explanation
+ ↓
+Recommendation
+ ↓
+Human Decision
+```
+
+The AI layer is therefore positioned as a **decision-support system**, rather than automatically making irreversible operational decisions.
+
+---
+
+# 29. Dashboard Architecture
+
+Different roles receive different dashboards.
+
+A dashboard can provide:
+
+### Operational KPIs
+
+* Active shipments
+* Pending documents
+* Vessel status
+* Berth utilization
+* Yard occupancy
+* Truck activity
+* Cargo operations
+* Congestion risk
+
+### Status Monitoring
+
+```text
+Normal
+Warning
+Delayed
+Critical
+```
+
+### Trend Analysis
+
+The platform can visualize changes in:
+
+* Shipment volume
+* Cargo volume
+* Yard utilization
+* Truck waiting time
+* Berth utilization
+* Congestion risk
+
+---
+
+# 30. End-to-End Operational Workflow
+
+The complete conceptual SmartPort AI workflow is:
+
+```text
+                     USER
+                       │
+                       ▼
+              AUTHENTICATION
+                       │
+                       ▼
+             ROLE IDENTIFICATION
+                       │
+                       ▼
+             ROLE-BASED DASHBOARD
+                       │
+       ┌───────────────┼────────────────┐
+       │               │                │
+       ▼               ▼                ▼
+   SHIPPING        PORT OPS          ADMIN
+       │               │                │
+       ▼               │                ▼
+   SHIPMENT            │           USER CONTROL
+       │               │
+       ▼               │
+  DOCUMENTS            │
+       │               │
+       └───────┬───────┘
+               ▼
+         VESSEL / VOYAGE
+               │
+               ▼
+         BERTH MANAGEMENT
+               │
+               ▼
+         CARGO OPERATIONS
+               │
+          ┌────┴─────┐
+          ▼          ▼
+        YARD       TRUCK
+     MANAGEMENT   MANAGEMENT
+          │          │
+          └────┬─────┘
+               ▼
+        TERMINAL / GATE
+               │
+               ▼
+      OPERATIONAL EVENTS
+               │
+               ▼
+        CENTRAL DATABASE
+               │
+               ▼
+       ANALYTICS / AI LAYER
+               │
+               ▼
+       CONGESTION RISK
+               │
+               ▼
+     ALERT / RECOMMENDATION
+               │
+               ▼
+       HUMAN DECISION
+```
+
+This represents the complete information flow rather than a collection of unrelated features.
+
+---
+
+# 31. Example Operational Scenario
+
+Consider a vessel arriving with a large container volume.
+
+### Step 1 — Shipment Submission
+
+The shipping company enters:
+
+```text
+Vessel
+IMO
+Voyage
+Cargo Type
+Container Count
+ETA
+ETD
+Dangerous Goods Information
+```
+
+### Step 2 — Document Submission
+
+Required shipment documents are associated with the shipment.
+
+### Step 3 — Verification
+
+Authorized personnel review the submitted documentation.
+
+### Step 4 — Berth Planning
+
+The vessel is associated with berth availability and operational scheduling.
+
+### Step 5 — Cargo Operation
+
+Loading/unloading activities are recorded.
+
+### Step 6 — Yard Impact
+
+Containers entering the terminal increase yard occupancy.
+
+### Step 7 — Truck Impact
+
+Containers requiring landside movement generate truck activity.
+
+### Step 8 — Data Aggregation
+
+The system combines:
+
+```text
+Berth
++
+Yard
++
+Truck
++
+Cargo
++
+Vessel
+```
+
+### Step 9 — Congestion Intelligence
+
+The system evaluates operational conditions.
+
+### Step 10 — Decision Support
+
+If multiple indicators show increasing pressure, the platform can flag the condition as a congestion risk.
+
+This demonstrates why the platform connects modules instead of treating them independently.
+
+---
+
+# 32. Security Architecture
+
+Security is applied at multiple layers.
+
+### Authentication
+
+Only authenticated users can access protected application functionality.
+
+### Authorization
+
+Role-based permissions determine which modules a user can access.
+
+### Input Validation
+
+User-supplied data is validated before processing.
+
+### File Validation
+
+Uploaded documents should be validated for permitted type and size.
+
+### Database Protection
+
+Database operations should be performed through controlled application interfaces rather than exposing database credentials to the frontend.
+
+### Session Security
+
+Authenticated sessions should use secure session/token handling appropriate to the deployed authentication architecture.
+
+---
+
+# 33. Data Integrity
+
+SmartPort AI maintains data integrity through:
+
+* Required fields
+* Unique identifiers
+* Referential relationships
+* Controlled status transitions
+* Validation rules
+* Role-based modification permissions
+* Timestamp tracking
+
+A shipment should not become operationally complete while required dependencies remain unresolved.
+
+---
+
+# 34. Error Handling
+
+The application should handle failures without silently losing operational data.
+
+Typical error categories include:
+
+```text
+Validation Error
+Authentication Error
+Authorization Error
+Database Error
+File Upload Error
+Network Error
+Invalid State Transition
+```
+
+The user interface should provide an understandable error message while technical details are retained for debugging/logging where appropriate.
+
+---
+
+# 35. Auditability
+
+Operational systems require traceability.
+
+Important actions can be associated with:
+
+```text
+User
+Timestamp
+Action
+Record
+Previous State
+New State
+```
+
+For example:
+
+```text
+User: Terminal Operator
+Action: Document Verified
+Record: Shipment SP-XXXXX
+Time: YYYY-MM-DD HH:MM
+```
+
+This creates a foundation for accountability and future audit requirements.
+
+---
+
+# 36. Scalability
+
+SmartPort AI is designed so that additional functionality can be introduced incrementally.
+
+Possible future integrations include:
+
+* Port IoT sensors
+* GPS truck tracking
+* Automatic gate systems
+* AIS vessel data
+* Weather feeds
+* Port community systems
+* Customs systems
+* Terminal operating systems
+* External logistics APIs
+* Real-time container tracking
+
+The application architecture separates operational modules so that new data sources can be incorporated without rebuilding the entire platform.
+
+---
+
+# 37. Real-Time Extension
+
+The current web architecture can be extended toward real-time event processing.
+
+For example:
+
+```text
+IoT / External System
+        ↓
+Event
+        ↓
+API / Message Layer
+        ↓
+Operational Database
+        ↓
+AI Processing
+        ↓
+Dashboard Update
+        ↓
+Alert
+```
+
+Potential real-time events include:
+
+* Vessel arrival
+* Berth release
+* Truck arrival
+* Gate entry
+* Container movement
+* Yard capacity change
+* Cargo operation completion
+
+---
+
+# 38. Technology Architecture
+
+SmartPort AI is implemented as a modern web application with separate presentation, application, data, and intelligence responsibilities.
+
+The project technology stack can be represented as:
+
+```text
+Frontend
+   ↓
+Web Application Interface
+   ↓
+Authentication / RBAC
+   ↓
+Backend / Application Services
+   ↓
+Database
+   ↓
+Analytics / AI
+```
+
+### Core Technology Categories
+
+| Layer          | Responsibility                            |
+| -------------- | ----------------------------------------- |
+| Frontend       | User interface, dashboards, forms, tables |
+| Authentication | Login, registration, session control      |
+| Authorization  | Role and permission management            |
+| Backend        | Business logic and data processing        |
+| Database       | Persistent operational data               |
+| File Storage   | Shipment/document storage                 |
+| Analytics      | KPI and operational metrics               |
+| AI Layer       | Congestion intelligence                   |
+| Deployment     | Hosting and production delivery           |
+
+> The exact package/library versions should be maintained in the repository's dependency files so that the implementation remains reproducible.
+
+---
+
+# 39. Repository Structure
+
+A recommended repository organization is:
+
+```text
 SmartPort-AI/
-│
-├── src/
-│   ├── components/
-│   ├── hooks/
-│   ├── lib/
-│   │   ├── workflow.ts
-│   │   ├── status-engine.ts
-│   │   ├── ml-pipeline.ts
-│   │   └── ...
-│   │
-│   ├── routes/
-│   │   ├── app.shipping.tsx
-│   │   ├── app.documents.tsx
-│   │   ├── app.port-authority.tsx
-│   │   ├── app.approvals.tsx
-│   │   ├── app.customs.tsx
-│   │   ├── app.terminal.tsx
-│   │   ├── app.warehouse.tsx
-│   │   ├── app.truck.tsx
-│   │   ├── app.logistics.tsx
-│   │   ├── app.ai.tsx
-│   │   ├── app.analytics.tsx
-│   │   └── app.admin.tsx
-│   │
-│   └── ...
-│
-├── supabase/
-│   ├── migrations/
-│   └── ...
-│
-├── public/
 │
 ├── README.md
 ├── package.json
-└── ...
+├── .env.example
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── layouts/
+│   ├── modules/
+│   │   ├── shipments/
+│   │   ├── documents/
+│   │   ├── berth/
+│   │   ├── yard/
+│   │   ├── trucks/
+│   │   ├── cargo/
+│   │   └── operations/
+│   │
+│   ├── authentication/
+│   ├── authorization/
+│   ├── services/
+│   ├── utils/
+│   └── types/
+│
+├── database/
+│   ├── schema/
+│   ├── migrations/
+│   └── seed/
+│
+├── ai/
+│   ├── preprocessing/
+│   ├── features/
+│   ├── models/
+│   └── inference/
+│
+├── public/
+│
+└── docs/
+    ├── architecture/
+    ├── workflows/
+    └── testing/
+```
+
+The actual repository structure should remain the authoritative representation of the implemented codebase.
+
+---
+
+# 40. Environment Configuration
+
+Environment-specific credentials should not be hard-coded into source code.
+
+A typical environment configuration can contain:
+
+```text
+DATABASE_URL
+AUTH_SECRET
+STORAGE_CONFIGURATION
+API_KEYS
+AI_SERVICE_CONFIGURATION
+APPLICATION_URL
+```
+
+Sensitive values should be stored through environment variables or the deployment platform's secret-management system.
+
+An `.env.example` file can document the required variable names without exposing actual credentials.
+
+---
+
+# 41. Testing Strategy
+
+Testing is performed across multiple layers.
+
+## Authentication Testing
+
+Verify:
+
+* Valid login
+* Invalid login
+* Registration
+* Approval workflow
+* Unauthorized access
+* Role restrictions
+
+## Shipment Testing
+
+Verify:
+
+* Form validation
+* Shipment creation
+* Reference generation
+* Database insertion
+* Status updates
+* Data retrieval
+
+## Document Testing
+
+Verify:
+
+* Upload
+* Association with shipment
+* Validation
+* Verification
+* Rejection workflow
+
+## Operational Testing
+
+Verify:
+
+* Berth updates
+* Yard updates
+* Truck updates
+* Cargo updates
+* Cross-module relationships
+
+## Dashboard Testing
+
+Verify:
+
+* KPI calculations
+* Role-specific visibility
+* Status display
+* Data refresh
+* Error states
+
+---
+
+# 42. Verification Matrix
+
+| Workflow             | Expected Result                             |
+| -------------------- | ------------------------------------------- |
+| User Registration    | Account is created in controlled state      |
+| Admin Approval       | User receives authorized access             |
+| Login                | Valid credentials authenticate successfully |
+| Role Detection       | Correct dashboard is displayed              |
+| Shipment Submission  | Valid shipment is stored                    |
+| Reference Generation | Unique shipment reference is created        |
+| Document Upload      | Document is associated with shipment        |
+| Document Review      | Authorized user can verify/reject           |
+| Berth Operation      | Berth status is updated                     |
+| Yard Operation       | Yard information is updated                 |
+| Truck Operation      | Truck activity is recorded                  |
+| Cargo Operation      | Cargo status is maintained                  |
+| Dashboard            | Operational metrics are displayed           |
+| Authorization        | Restricted modules remain inaccessible      |
+
+---
+
+# 43. Performance Considerations
+
+Port systems may eventually handle large operational datasets.
+
+The architecture therefore considers:
+
+### Database Indexing
+
+Frequently queried identifiers such as shipment reference, vessel ID, status, and timestamps should be indexed.
+
+### Pagination
+
+Large tables should use pagination rather than loading every record simultaneously.
+
+### Filtering
+
+Operational dashboards should support filtering by:
+
+* Date
+* Status
+* Vessel
+* Shipment
+* Terminal
+* Berth
+* Truck
+* Cargo type
+
+### Caching
+
+Frequently requested non-volatile information can be cached where appropriate.
+
+### Asynchronous Processing
+
+Heavy AI or document-processing tasks can be moved to background processing as the platform scales.
+
+---
+
+# 44. Congestion Prevention Strategy
+
+The ultimate purpose of the platform is not simply to report congestion.
+
+It is to provide information early enough for operational teams to respond.
+
+The prevention cycle is:
+
+```text
+OBSERVE
+   ↓
+MEASURE
+   ↓
+DETECT
+   ↓
+PREDICT
+   ↓
+ALERT
+   ↓
+RESPOND
+   ↓
+MONITOR
+```
+
+For example:
+
+```text
+Increasing Yard Occupancy
+        +
+Increasing Truck Waiting Time
+        +
+High Berth Utilization
+        ↓
+Increasing Congestion Risk
+        ↓
+Early Warning
+        ↓
+Operational Intervention
+```
+
+The intervention remains under human operational control.
+
+---
+
+# 45. Example Recommendations
+
+Depending on the available operational data, the platform can support recommendations such as:
+
+* Prioritize delayed vessel operations
+* Review berth scheduling
+* Monitor high-occupancy yard zones
+* Increase attention to truck queues
+* Review pending documentation
+* Identify shipments contributing to operational bottlenecks
+* Monitor abnormal processing delays
+
+Recommendations should be presented as decision support rather than automatic commands.
+
+---
+
+# 46. Limitations
+
+The effectiveness of congestion prediction depends on the quality, volume, and timeliness of operational data.
+
+The prototype may not have access to every real-world port data source.
+
+Potential limitations include:
+
+* Limited historical training data
+* Lack of live IoT data in a prototype environment
+* Simulated operational events
+* Limited external system integrations
+* Differences between ports and terminal operating procedures
+* Model accuracy depending on available training data
+
+These limitations do not prevent the platform architecture from being extended for production deployment.
+
+---
+
+# 47. Production Deployment Path
+
+A production deployment can evolve through the following stages:
+
+```text
+Prototype
+   ↓
+Controlled Pilot
+   ↓
+Single Terminal Deployment
+   ↓
+Port-Wide Deployment
+   ↓
+Multi-Port Deployment
+```
+
+### Pilot Deployment
+
+Start with:
+
+* Shipment management
+* Documentation
+* Berth monitoring
+* Yard monitoring
+* Truck monitoring
+* Dashboard
+
+### Production Expansion
+
+Then integrate:
+
+* Real-time vessel data
+* GPS
+* IoT
+* Gate systems
+* Terminal systems
+* Customs
+* External logistics systems
+* Historical AI datasets
+
+---
+
+# 48. Future Enhancements
+
+Future versions can introduce:
+
+### Predictive ETA
+
+Use historical and live information to estimate vessel arrival more accurately.
+
+### Advanced Congestion Prediction
+
+Train machine-learning models using historical port operations.
+
+### Computer Vision
+
+Use cameras for:
+
+* Truck queue detection
+* Container movement monitoring
+* Gate monitoring
+* Safety monitoring
+
+### IoT Integration
+
+Connect:
+
+* Yard sensors
+* Gate sensors
+* Equipment telemetry
+* Environmental sensors
+
+### Digital Twin
+
+Create a virtual operational representation of the port.
+
+### Automated Alerts
+
+Send alerts through:
+
+* Web notifications
+* Email
+* SMS
+* Mobile applications
+
+### Advanced Optimization
+
+Use optimization algorithms for:
+
+* Berth allocation
+* Truck scheduling
+* Yard allocation
+* Resource planning
+
+---
+
+# 49. Why the Architecture Is Feasible
+
+SmartPort AI is technically feasible because it is based on technologies already commonly used for enterprise web applications.
+
+The system does not require every advanced technology to be available from day one.
+
+The architecture allows progressive adoption:
+
+```text
+Digital Workflow
+       ↓
+Centralized Data
+       ↓
+Operational Analytics
+       ↓
+Real-Time Integration
+       ↓
+AI Prediction
+       ↓
+Optimization
+```
+
+This makes the solution suitable for incremental deployment.
+
+---
+
+# 50. Why the Solution Is Different
+
+SmartPort AI is not designed as a standalone shipment tracker or a simple dashboard.
+
+Its key architectural difference is **operational connectivity**.
+
+```text
+Shipment
+   ↕
+Documents
+   ↕
+Vessel
+   ↕
+Berth
+   ↕
+Cargo
+   ↕
+Yard
+   ↕
+Truck
+   ↕
+Terminal
+   ↕
+Congestion Intelligence
+```
+
+The platform creates a shared operational context across these activities.
+
+---
+
+# 51. Technical Value to Port Operators
+
+The platform can help operators:
+
+* Reduce information fragmentation
+* Improve operational visibility
+* Reduce repeated data entry
+* Track shipment progress
+* Monitor operational bottlenecks
+* Identify congestion risk earlier
+* Coordinate stakeholders
+* Support data-driven decisions
+* Create a foundation for predictive port management
+
+---
+
+
+# 52. Technical Summary
+
+SmartPort AI establishes a unified digital architecture for port operations.
+
+The system begins with authenticated, role-based users and extends through shipment submission, documentation, vessel operations, berth management, cargo handling, yard operations, truck movement, and centralized monitoring.
+
+Operational data is maintained in a common data layer, allowing relationships between different activities to be analyzed.
+
+The intelligence layer transforms operational signals into congestion-risk information and decision support.
+
+The architecture is intentionally modular so that future versions can integrate real-time port data, IoT devices, GPS, vessel tracking, computer vision, advanced machine learning, and optimization algorithms.
+
+---
+
+# 53. Final Architecture
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                        SMARTPORT AI                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│                    AUTHENTICATION                           │
+│                           ↓                                 │
+│                 ROLE-BASED ACCESS CONTROL                  │
+│                           ↓                                 │
+│                    USER DASHBOARDS                          │
+│                           ↓                                 │
+│     ┌──────────┬──────────┬──────────┬──────────┐           │
+│     │          │          │          │          │           │
+│  SHIPPING   DOCUMENTS   BERTH       YARD      TRUCK         │
+│     │          │          │          │          │           │
+│     └──────────┴──────────┴────┬─────┴──────────┘           │
+│                                │                            │
+│                          CARGO OPERATIONS                   │
+│                                │                            │
+│                         PORT OPERATIONS                     │
+│                                │                            │
+│                                ▼                            │
+│                    CENTRAL OPERATIONAL DATA                 │
+│                                │                            │
+│                                ▼                            │
+│                    ANALYTICS / AI ENGINE                    │
+│                                │                            │
+│              ┌─────────────────┴─────────────────┐          │
+│              │                                   │          │
+│       CONGESTION RISK                      INSIGHTS        │
+│              │                                   │          │
+│              └─────────────────┬─────────────────┘          │
+│                                ▼                            │
+│                     ALERTS / RECOMMENDATIONS                │
+│                                │                            │
+│                                ▼                            │
+│                     HUMAN DECISION SUPPORT                  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 54. Conclusion
+
+SmartPort AI provides a technical foundation for transforming port operations from fragmented, reactive workflows into a connected, data-driven management environment.
+
+The platform connects stakeholders, operational records, documents, physical movements, and management decisions through a common digital workflow.
+
+Its architecture supports the transition from:
+
+**Manual → Digital**
+
+**Disconnected → Integrated**
+
+**Reactive → Predictive**
+
+**Data Silos → Shared Operational Intelligence**
+
+The current platform establishes the foundation, while real-time data integration, advanced machine learning, IoT, computer vision, optimization, and digital-twin capabilities provide a clear path toward a production-scale intelligent port management ecosystem.
+
+---
+
+## Project Documentation
+
+**Project:** SmartPort AI
+**Domain:** Smart Port Management / Maritime Logistics / AI
+**Primary Objective:** Port Congestion Prevention and Operational Intelligence
+**Application Type:** Integrated Web-Based Enterprise Platform
+**Target Users:** Port authorities, shipping companies, terminal operators, logistics teams, truck operators, yard teams, berth teams, cargo teams, and related stakeholders.
+
